@@ -106,9 +106,9 @@ A konkrét teljesítménycélokat a kezdeti prototípus és a fejlesztői hardve
 
 ### Javasolt megoldás
 
-A kezdeti terv Godot játékmotorra és GDScriptre épül. A terep előállítása, a blokkok kezelése és a LOD-szint kiválasztása saját kódot használ. A Godot biztosítja a 3D-s megjelenítést, a kamera kezelését és az általános projektinfrastruktúrát.
+A kezdeti terv a Godot játékmotorra és a GDScript programozási nyelvre épül. A terepgenerálás, a blokkok kezelése és a LOD-szint kiválasztása saját kóddal valósul meg. A Godot biztosítja a 3D-s megjelenítést, a kamera kezelését és az általános projektinfrastruktúrát.
 
-A fejlesztés először egyetlen generált terepblokkal indul. Ezt követi a kamerához igazodó dinamikus blokkkezelés, majd a saját LOD-rendszer, a szomszédos blokkok átmeneteinek vizsgálata és a mérési funkciók kialakítása.
+A fejlesztés először egyetlen generált terepblokkal indul. Ezt követi a kamerához igazodó dinamikus blokkkezelés, majd a saját LOD-rendszer kialakítása, a szomszédos blokkok közötti átmenetek vizsgálata és a mérési funkciók megvalósítása. Ezt követően kerül sor a két terepgeneráló algoritmus összehasonlítására.
 
 ### Technológiai irány
 
@@ -116,11 +116,12 @@ A fejlesztés először egyetlen generált terepblokkal indul. Ezt követi a kam
 | --- | --- | --- | --- |
 | Játékmotor | Godot | 3D-megjelenítés és általános játékfejlesztési infrastruktúra | A generált geometria és a sok blokk teljesítményét prototípussal kell ellenőrizni. |
 | Programozási nyelv | GDScript | A Godothoz illeszkedő fejlesztési nyelv | A nagyobb generálási feladatok teljesítményét mérni kell. |
-| Terepreprezentáció | Blokkokra bontott generált geometria | A blokkok külön generálhatók, frissíthetők és eltávolíthatók | A blokkfelbontást és a határok kezelését ki kell választani. |
-| LOD-kiválasztás | Saját, paraméterezhető mechanizmus | Lehetővé teszi a különböző stratégiák vizsgálatát | A konkrét stratégiák még kiválasztásra várnak. |
-| Feldolgozás | Fokozatos vagy aszinkron blokkfeldolgozás | Csökkentheti a generálás fő szálra gyakorolt hatását | A Godotban alkalmazható biztonságos munkamegosztást ellenőrizni kell. |
-| Verziókezelés | Git és GitHub | A forráskód, a dokumentáció és a fejlesztési lépések követése | A mérési eredmények tárolási formáját meg kell határozni. |
-| Mérés és dokumentáció | Rögzített tesztbeállítások és eredménytáblák | Az összehasonlítások ismételhetősége | A mérőszámok és a tesztesetek pontosítása szükséges. |
+| Terepreprezentáció | Blokkokra bontott generált geometria | A blokkok külön generálhatók, frissíthetők és eltávolíthatók. | A blokkfelbontást és a blokkok közötti átmenetek kezelését meg kell határozni. |
+| LOD-kiválasztás | Saját, paraméterezhető mechanizmus | Lehetővé teszi a részletességi szintek szabályozását. | A konkrét LOD-szabályokat meg kell határozni. |
+| Terepgenerálás | Két összehasonlítandó terepgeneráló algoritmus | A generálási teljesítmény, a memóriaigény és a vizuális minőség összehasonlítása. | A konkrét algoritmusokat ki kell választani. |
+| Feldolgozás | Fokozatos vagy aszinkron blokkfeldolgozás | Mérsékelheti a generálás fő szálra gyakorolt hatását. | A Godotban alkalmazható biztonságos feldolgozási módot ellenőrizni kell. |
+| Verziókezelés | Git és GitHub | A forráskód, a dokumentáció és a fejlesztési lépések követése. | A mérési eredmények tárolási formáját meg kell határozni. |
+| Mérés és dokumentáció | Rögzített tesztbeállítások és eredménytáblák | Az összehasonlítások ismételhetőségének biztosítása. | A mérőszámokat és a teszteseteket pontosítani kell. |
 
 ### Kezdeti architektúravázlat
 
@@ -143,7 +144,7 @@ flowchart TD
 | Kockázat / feltételezés | Validáció | Tartalék megközelítés |
 | --- | --- | --- |
 | Egy terepblokk megfelelő sebességgel generálható. | Egyetlen blokk generálási idejének és geometriájának mérése több felbontással. | Egyszerűbb terepfüggvény vagy kisebb kezdeti felbontás használata. |
-| A dinamikus blokkkezelés a kamera mozgásához igazítható. | Blokkok betöltésének és eltávolításának tesztelése egyszerű kameramozgással. | Kevesebb aktív blokk vagy nagyobb blokkbetöltési küszöb használata. |
-| A LOD-szintek között kezelhetők a látható átmenetek. | Szomszédos blokkok vizsgálata különböző részletességi szinteken. | A hibák mérhető dokumentálása és egy egyszerűbb átmenetkezelési megoldás kipróbálása. |
+| A dinamikus blokkkezelés a kamera mozgásához igazítható. | A blokkok betöltésének és eltávolításának tesztelése egyszerű kameramozgással. | Kevesebb aktív blokk vagy kisebb látótávolság használata. |
+| A LOD-szintek közötti látható átmenetek vizsgálhatók és kezelhetők. | Szomszédos blokkok vizsgálata különböző részletességi szinteken. | A hibák mérhető dokumentálása és egyszerűbb átmenetkezelési módszer kipróbálása. |
 | A generálás fokozatosan vagy aszinkron módon végrehajtható. | A generálás fő szálra gyakorolt hatásának összehasonlítása. | A feldolgozás kisebb lépésekre bontása és a blokkok korlátozott ütemű előállítása. |
-| A kiválasztott módszerek eredményei érdemben összehasonlíthatók. | Azonos terepparaméterekkel és mérési körülményekkel végzett tesztek. | Kevesebb, de jól kontrollált teszteset használata.</div>
+| A két terepgeneráló algoritmus eredményei érdemben összehasonlíthatók. | Azonos vagy megfelelően összehangolt terepparaméterek és mérési körülmények mellett végzett tesztek. | Kevesebb, de jól kontrollált teszteset alkalmazása. |
