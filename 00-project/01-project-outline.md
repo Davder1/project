@@ -1,4 +1,10 @@
-# name: Pernecker Dávid neptun: YSFKEJ id: 2026-NP-03 github: https://github.com/Davder1/project github_project: 
+---
+name: Pernecker Dávid
+neptun: YSFKEJ
+id: 2026-NP-03
+github: https://github.com/Davder1/project
+github_project: 
+---
 
 # Valós idejű procedurális terepgenerálás és a részletességi szintek kezelése
 
