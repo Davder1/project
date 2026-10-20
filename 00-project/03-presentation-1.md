@@ -1,5 +1,5 @@
 ---
-title: "Valós idejű procedurális terepgenerálás és LOD"
+project_outline: https://github.com/Davder1/project/blob/main/00-project/01-project-outline.md
 ---
 
 <!-- @slide Címlap -->
