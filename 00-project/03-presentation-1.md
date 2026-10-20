@@ -89,7 +89,7 @@ A nagy kiterjedésű terepek valós idejű megjelenítése jelentős teljesítm�
 
 <!-- @slide Kezdeti felhasználói utak – mérés -->
 
-# 2. Terepgenerálási algoritmusok összehasonlítása
+# Terepgenerálási algoritmusok összehasonlítása
 
 1. A felhasználó kiválasztja a vizsgált algoritmust.
 2. Beállítja a mérési paramétereket.
